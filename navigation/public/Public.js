@@ -11,7 +11,7 @@ import OfferScreen from '../../src/screens/Offers';
 import Registration from '../../src/screens/Registration';
 import Matchs from '../../src/screens/Matchs';
 import Profiles from '../../src/screens/Profile';
-
+import ChatScreen from '../../src/screens/Chat';
 const StackPublic = createNativeStackNavigator();
 
 export default function Public() {
@@ -76,6 +76,12 @@ export default function Public() {
         component={OfferScreen}
         options={{headerShown: false}}
       />
+       <StackPublic.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{headerShown: false}}
+      />
+      
     </StackPublic.Navigator>
   );
 }
