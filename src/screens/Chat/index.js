@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text,Image, TextInput, Button, FlatList,ScrollView, StyleSheet,TouchableOpacity,KeyboardAvoidingView  } from 'react-native';
-//import io from 'socket.io-client';
 import { findUserAuthenticated } from '../../../AuthService';
 import { findByUid } from '../../services/UserService';
 import {CARD, FONT_SIZE, FUENTES, fuentes} from '../../utils/constants';
@@ -10,7 +9,6 @@ import {  useRoute } from '@react-navigation/native';
 import IconUser from 'react-native-vector-icons/FontAwesome';
 import { createMessage, listenForMessages } from '../../services/ChatService';
 
-//const socket = io('https://node-chat-1-p5t5.onrender.com' /*'http://192.168.2.103:8000'*/);  // Asegúrate de usar la IP correcta si estás probando en un dispositivo físico
 
 const Chat = ({route}) => {
   const [message, setMessage] = useState('');
@@ -18,40 +16,12 @@ const Chat = ({route}) => {
   const [user, setUser] = useState('');
   const imgProfileRecrutier = route.params.recrutier.imageProfile
   const uidRecrutier = route.params.recrutier.uid
-  console.log("imageProf",imgProfileRecrutier)
-  console.log("route",route.params)
-  useEffect(() => {
-    // Escuchar eventos desde el servidor
-    socket.on('send name', (username) => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { type: 'name', content: `${username}:` },
-      ]);
-    });
-
-    socket.on('send message', (chat) => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { type: 'message', content: chat },
-      ]);
-    });
-
-    return () => {
-      // Limpiar los listeners cuando el componente se desmonta
-      socket.off('send name');
-      socket.off('send message');
-    };
-  }, []);
-
-
  
 
   const handleSubmit = () => {
     if (message && user) {
       /*user.uid corresponde al id del chat que es el uid del candidato*/
       createMessage(message, user.uid,user.uid, user.name);
-      //socket.emit('send name', user.name);  // Enviar el nombre al servidor
-      //socket.emit('send message', message);  // Enviar el mensaje al servidor
       setMessage('');  // Limpiar el campo del mensaje
     }
   };
@@ -75,35 +45,6 @@ const Chat = ({route}) => {
         };
       }
     }, [user]);
-
-  // const renderItem = ({ item }) => (
-  //   <View style={{flexDirection:'row'}} >
-     
-  //        {/* <View style={styles.imageContainer}> */}
-        
-  //         <Image
-  //         source={{ uri:item.senderUId == item.chatId ? user.imageProfile === '' ?  null :user.imageProfile : imgProfileRecrutier }}
-  //         style={styles.avatar}
-  //       />
-      
-  //       {/* </View>  */}
-     
-  //   <View style={styles.nameContainer }>
-  //   <Text  style={[ styles.nameText]}>
-  //       {item.senderName}
-  //     </Text>
-  //     </View>
-
-  //     <View style={ styles.messageContainer}>
-
-  //     <Text  style={[styles.messageText]}>
-  //       {item.content}
-  //     </Text>
-  //   </View>
-    
-  //   </View>
-   
-  // );
 
   const renderItem = ({ item }) => (
     <View style={styles.messageRow}>
