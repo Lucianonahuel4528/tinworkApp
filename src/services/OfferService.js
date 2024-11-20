@@ -2,6 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 
 export const update = (offer, user) => {
   user.status = 'wait';
+  console.log("userrr desde update",user.certifications)
   offer.interestedUsers.push(user);
   firestore()
     .collection('Offers')

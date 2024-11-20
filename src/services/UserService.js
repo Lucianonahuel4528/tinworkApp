@@ -19,6 +19,7 @@ export const createUser = async ({name, email, pass}) => {
       interestingOffers: [],
       uninterestingOffers: [],
       offersMatch: [],
+      certifications: [] 
     })
     .then(result => {
       console.log('User added!');
@@ -51,3 +52,40 @@ export const findByUid = async uid => {
       response.docs.length > 0 ? response.docs[0].data() : null,
     );
 };
+
+
+export const removeCertification = async (uid, certificationUrl) => {
+  try {
+    // Buscar al usuario en Firestore por UID
+    const userDoc = await firestore()
+      .collection('Users')
+      .where('uid', '==', uid)
+      .get();
+
+    if (userDoc.docs.length === 0) {
+      throw new Error('Usuario no encontrado.');
+    }
+
+    const userRef = userDoc.docs[0].ref; // Referencia al documento del usuario
+    const userData = userDoc.docs[0].data(); // Datos actuales del usuario
+
+    // Verificar si la certificación existe
+    const currentCertifications = userData.certifications ?? [];
+    if (!currentCertifications.includes(certificationUrl)) {
+      throw new Error('La certificación no existe en el perfil del usuario.');
+    }
+
+    // Filtrar la certificación a eliminar
+    const updatedCertifications = currentCertifications.filter(
+      (cert) => cert !== certificationUrl
+    );
+
+    // Actualizar el campo certifications en Firestore
+    await userRef.update({ certifications: updatedCertifications });
+
+    console.log('Certificación eliminada exitosamente.');
+    return { success: true };
+  } catch (error) {
+    console.error('Error al eliminar la certificación:', error);
+    throw error;
+  } }
