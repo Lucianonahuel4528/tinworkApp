@@ -6,6 +6,7 @@ import {Image} from 'react-native';
 import Profiles from './Profile';
 import Matchs from './Matchs';
 import MatchList from '../components/matchList';
+import ChatList from '../components/ChatList';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
@@ -22,6 +23,9 @@ const screenOptions = (route, color) => {
       break;
     case 'Profile':
       iconName = 'user';
+      break;
+    case 'Chats':
+      iconName='comments'
       break;
     default:
       break;
@@ -51,6 +55,16 @@ export default function HomeScreen() {
         options={{
           title: 'Mis Matchs',
           tabBarLabel: 'Mis Matchs',
+          headerBackVisible: false,
+          headerShown: false,
+        }}
+      />
+       <Tab.Screen
+        name="Chats"
+        component={ChatList}
+        options={{
+          title: 'Chat',
+          tabBarLabel: 'Chat',
           headerBackVisible: false,
           headerShown: false,
         }}
