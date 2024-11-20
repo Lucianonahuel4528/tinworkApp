@@ -19,11 +19,22 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexBasis: 121,
   },
-  abilitiesContainer: {},
+  abilitiesContainer: {
+    marginVertical: 10
+
+  },
   locationContainer: {
     flexBasis: 198,
   },
-  descriptionContainer: {},
+  descriptionContainer: {
+    marginVertical: 10,
+    padding: 16, // Padding para evitar que el texto toque los bordes
+    backgroundColor: '#f9f9f9', // Fondo claro para diferenciar la sección
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+
+  },
   title: {
     fontFamily: FUENTES.BOLD,
     fontSize: FONT_SIZE.xl2,
@@ -85,9 +96,15 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   textInput: {
+    height: 100, // Altura suficiente para múltiples líneas
+    borderColor: '#ccc',
+    borderWidth: 1,
     borderRadius: 8,
-    borderWidth: 0.2,
-    borderColor: 'gray',
+    padding: 10, // Padding interno
+    fontSize: 16, // Tamaño de fuente adecuado
+    color: '#333', // Color de texto
+    backgroundColor: '#fff', // Fondo blanco para el TextInput
+    textAlignVertical: 'top', // Alinear el texto al inicio
   },
   button: {
     alignItems: 'center',
@@ -102,7 +119,123 @@ export const styles = StyleSheet.create({
     color: colors.tinworkBlue,
   },
   tituloyBoton: {
-    display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
   },
+  cvContainer: {
+    marginVertical: 20,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    //backgroundColor: '#f9f9f9',
+  },
+  cvButton: {
+    padding: 10,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  cvText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  pdfContainer: {
+    marginTop: 20,
+    height: 300,  // Altura del visor PDF
+  },
+  pdf: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  cvContainer: {
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: '#f9f9f9',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 3,
+    marginVertical: 10,
+  },
+  titulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  buttonsContainer: {
+     flexDirection: 'row',
+  flexWrap: 'wrap', // Permite que los botones se ajusten a nuevas líneas
+  justifyContent: 'flex-start', // Alinea los botones a la izquierda
+  marginVertical: 5,
+  },
+  cvButton: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 10,
+    marginHorizontal: 5,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: '600',
+  },
+  pdfContainer: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  previewTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  pdf: {
+    width: '100%',
+    height: 300,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  thumbnail: {
+    width: 100,
+    height: 100,
+    margin: 5,
+    borderRadius: 8,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '90%',
+    height: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fullSizeImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+  },
+  certificationContainer: {
+    position: 'relative', // Para que el ícono se posicione relativo a este contenedor
+    margin: 5,
+  },
+  trashIcon: {
+    position: 'absolute', // Posiciona el ícono de forma absoluta
+    top: 5, // Ajusta la distancia desde la parte superior
+    right: 5, // Ajusta la distancia desde la derecha
+    zIndex: 1, // Asegura que el ícono esté por encima de la imagen
+  },
+  certificationImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 8,
+  }
 });
