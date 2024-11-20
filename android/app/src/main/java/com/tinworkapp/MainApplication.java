@@ -27,7 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
 protected List<ReactPackage> getPackages() {
     List<ReactPackage> packages = new PackageList(this).getPackages();
     // Agregar manualmente el paquete de react-native-screens
-    packages.add(new RNScreensPackage());
+    //packages.add(new RNScreensPackage());
     return packages;
 }
 
@@ -50,8 +50,11 @@ protected List<ReactPackage> getPackages() {
   }
 
   @Override
-  public void onCreate() {
-    super.onCreate();
+ 
+   
+public void onCreate( ) {
+        super.onCreate();
+    
     // If you opted-in for the New Architecture, we enable the TurboModule system
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
