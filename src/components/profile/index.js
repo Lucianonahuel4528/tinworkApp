@@ -25,9 +25,10 @@ import {styles} from './styles';
 import FormSubmitButton from '../form-submit-button';
 import {todasProvincias} from '../../services/ProvinceService';
 import * as ImagePicker from 'react-native-image-picker';
-//import Pdf from 'react-native-pdf';
-//import RNFetchBlob from 'react-native-blob-util';
-//import DocumentPicker from 'react-native-document-picker';
+import Pdf from 'react-native-pdf';
+import ReactNativeBlobUtil from 'react-native-blob-util'
+
+import DocumentPicker from 'react-native-document-picker';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Asegúrate de importar el ícono
 
 export default function Profile({navigation}) {
@@ -339,9 +340,9 @@ export default function Profile({navigation}) {
   // Función para descargar y renderizar el PDF
   const renderPDF = async () => {
     try {
-      const res = await RNFetchBlob.config({
+      const res = await ReactNativeBlobUtil.config({
         fileCache: true,
-        path: RNFetchBlob.fs.dirs.DocumentDir + '/my-pdf.pdf', // Ruta donde guardar el PDF
+        path: ReactNativeBlobUtil.fs.dirs.DocumentDir + '/my-pdf.pdf', // Ruta donde guardar el PDF
       })
       .fetch('GET', cvUrl);
 
@@ -354,9 +355,9 @@ export default function Profile({navigation}) {
   const handleCvView = async () => {
     if (!showPdf && cvUrl) {
       try {
-        const res = await RNFetchBlob.config({
+        const res = await ReactNativeBlobUtil.config({
           fileCache: true,
-          path: RNFetchBlob.fs.dirs.DocumentDir + '/my-pdf.pdf',
+          path: ReactNativeBlobUtil.fs.dirs.DocumentDir + '/my-pdf.pdf',
         }).fetch('GET', cvUrl);
         setPdfPath(res.path());
       } catch (error) {
@@ -578,7 +579,7 @@ const [selectedImage, setSelectedImage] = useState(null);
             </View>
           )}
         </View>} 
-
+        <View style={styles.cvContainer}> 
         <Pressable onPress={handleCertificationPicker}>
         <Text style={{ color: '#2E81FB', fontSize: 18, padding: 10 }}>Añadir Certificación</Text>
       </Pressable>
@@ -586,7 +587,6 @@ const [selectedImage, setSelectedImage] = useState(null);
       <Pressable onPress={()=>saveCertifications() }>
         <Text style={{ color: '#2E81FB', fontSize: 18, padding: 10 }}>Guardar Certificación</Text>
       </Pressable>
-
       {uploading && <ActivityIndicator size="large" color="#0000ff" />}
         <Text style={{ fontSize: 18, paddingVertical: 10 }}>Mis Certificaciones</Text>
       <FlatList
@@ -597,6 +597,10 @@ const [selectedImage, setSelectedImage] = useState(null);
         renderItem={renderCertification}
         horizontal
       />
+        </View>    
+        
+
+      
        {/* Modal para mostrar la imagen seleccionada en grande */}
        <Modal
         visible={isModalVisible}
