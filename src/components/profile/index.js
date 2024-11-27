@@ -43,7 +43,7 @@ export default function Profile({navigation}) {
   const [image, setImage] = useState(
     userAuth
       ? userAuth.imageProfile
-      : {uri: 'https://reactnative.dev/img/tiny_logo.png'},
+      : {uri: 'https://w7.pngwing.com/pngs/223/244/png-transparent-computer-icons-avatar-user-profile-avatar-heroes-rectangle-black.png'},
   );
 
   const [cvFile, setCvFile] = useState(null); // Estado para el CV
@@ -75,6 +75,7 @@ export default function Profile({navigation}) {
   };
 
   const saveCertifications = async () => {   
+    console.log("certifications desde save",certifications)
     try {
       // Evitar múltiples ejecuciones
       if (certifications.length === 0) {
@@ -126,9 +127,9 @@ export default function Profile({navigation}) {
         type: 'success',
       });
       
-      // Limpia el estado de certificaciones
+      // // Limpia el estado de certificaciones
       setCertifications([]);
-      setDataCertifications(updatedCertifications);
+      // setDataCertifications(updatedCertifications);
     } catch (error) {
       console.error('Error al guardar certificaciones:', error);
       showMessage({
@@ -144,10 +145,14 @@ export default function Profile({navigation}) {
       console.log("uid",uid)
       
       await removeCertification(uid, url);
-      setCertifications(prevCertifications => 
+
+      setDataCertifications(prevCertifications => 
         prevCertifications.filter(cert => cert !== url)
       );
-      
+      setUserAuth((prev) => ({
+      ...prev,
+      certifications: prev.certifications.filter((cert) => cert !== url),
+    }));
       showMessage({ message: 'Certificación eliminada exitosamente.', type: 'success' });
     } catch (error) {
       showMessage({ message: `Error al eliminar la certificación: ${error.message}`, type: 'danger' });
@@ -165,7 +170,9 @@ export default function Profile({navigation}) {
     if (userAuth?.cv){
       setCvUrl(userAuth?.cv);
     }
-
+    if (userAuth?.certifications) {
+      setDataCertifications(userAuth?.certifications)
+    }
    
   }, [userAuth]);
 
@@ -479,7 +486,7 @@ const [selectedImage, setSelectedImage] = useState(null);
           <View style={styles.datosContainer}>
             <Text style={styles.titulos}>Nombre Completo</Text>
             <Text style={styles.datos}>{userAuth?.name || ''}</Text>
-            <Text style={styles.titulos}>E-Mail</Text>
+            <Text style={styles.titulos}>Correo electrónico</Text>
             {console.log("userAuth",userAuth)}
             <Text style={styles.datos}>{userAuth?.email || ''}</Text>
           </View>
