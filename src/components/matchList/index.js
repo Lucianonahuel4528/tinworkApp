@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import {findUserAuthenticated} from '../../../AuthService';
 import {findByUid} from '../../services/UserService';
 import {CARD, FONT_SIZE, FUENTES, fuentes} from '../../utils/constants';
-
+import offerMaletin from '../../../src/assets/images/maletin.png'
 const MatchList = () => {
   const [matchs, setMatchs] = useState([]);
 
@@ -28,12 +28,12 @@ const MatchList = () => {
   return (
     <ScrollView style={styles.container}>
       <Text style={{fontSize: 35, padding: 15}}>Mis Matchs</Text>
-      {matchs.map(match => (
-        <View style={styles.matchContainer} key={match.id}>
+      {matchs.map((match,index) => (
+        <View style={styles.matchContainer} key={`${match.id}-${index}`}>
           <View style={styles.imageContainer}>
             <Image
               style={styles.img}
-              source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+              source={offerMaletin}
             />
           </View>
           <View style={styles.detailContainer}>
