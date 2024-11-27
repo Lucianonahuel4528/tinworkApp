@@ -62,19 +62,19 @@ export default function Card({
         <Animated.View
           style={[
             styles.choiseContainer,
-            styles.likeContainer,
-            {opacity: likeOpacity},
+            styles.nopeContainer,
+            {opacity: nopeOpacity},
           ]}>
-          <Choise type="like" title="ME INTERESA" />
+        <Choise type="like" title="ME INTERESA" />
         </Animated.View>
         <Animated.View
           style={[
             styles.choiseContainer,
-            styles.nopeContainer,
-            {opacity: nopeOpacity},
+            styles.likeContainer,
+            {opacity: likeOpacity},
           ]}>
           <Choise type="nope" title="NO ME INTERESA" />
-        </Animated.View>
+          </Animated.View>
       </>
     );
   }, []);
