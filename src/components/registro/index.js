@@ -147,7 +147,7 @@ export default function Registro({navigation}) {
           defaultValue={formData.apellido}
         />
         <Input
-          placeholder="Correo"
+          placeholder="Correo electrónico"
           containerStyle={styles.input}
           onChange={e => onChange(e, 'correo')}
           keyboardType="email-address"
